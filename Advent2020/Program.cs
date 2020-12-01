@@ -35,9 +35,9 @@ namespace Advent2020
         public override Day Run()
         {
             dayOfMonth = 1;
-            var expense = new ExpenseReport();
-            answer_part1 = expense.MultiplyTwoEntriesFromFile("input/day1.txt").ToString();
-            answer_part2 = expense.MultiplyThreeEntriesFromFile("input/day1.txt").ToString();
+            ExpenseReport expense = new ExpenseReport();
+            answer_part1 = expense.MultiplyEntriesFromFile("input/day1.txt", 2, 2020).ToString();
+            answer_part2 = expense.MultiplyEntriesFromFile("input/day1.txt", 3, 2020).ToString();
             return this;
         }
     }
