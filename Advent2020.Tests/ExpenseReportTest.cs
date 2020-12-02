@@ -4,11 +4,11 @@ using Xunit;
 
 namespace Advent2020
 {
-    public class ExpenseReportTests
+    public class ExpenseReportTest
     {
         private ExpenseReport _expense;
 
-        public ExpenseReportTests()
+        public ExpenseReportTest()
         {
             _expense = new ExpenseReport();
         }
@@ -27,12 +27,12 @@ namespace Advent2020
         [Fact]
         public void TestMultiplyTwoEntriesFromFile()
         {
-            Assert.Equal(514579, _expense.MultiplyEntriesFromFile("test_input.txt", 2, 2020));
+            Assert.Equal(514579, _expense.MultiplyEntriesFromFile("input/day1.txt", 2, 2020));
         }
         [Fact]
         public void TestMultiplyThreeEntriesFromFile()
         {
-            Assert.Equal(241861950, _expense.MultiplyEntriesFromFile("test_input.txt", 3, 2020));
+            Assert.Equal(241861950, _expense.MultiplyEntriesFromFile("input/day1.txt", 3, 2020));
         }
     }
 }

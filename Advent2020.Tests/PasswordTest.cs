@@ -16,7 +16,7 @@ namespace Advent2020
         [Fact]
         public void TestPasswordsFromString()
         {
-            Assert.Equal(2, Password.CheckPasswordsFromFile("test_input.txt"));
+            Assert.Equal(2, Password.CheckPasswordsFromFile("input/day2.txt"));
         }
         [Theory]
         [InlineData("1-3 a: abcde", true)]
@@ -29,7 +29,7 @@ namespace Advent2020
                 [Fact]
         public void TestPasswordsFromStringToboggan()
         {
-            Assert.Equal(1, Password.CheckPasswordsFromFileToboggan("test_input.txt"));
+            Assert.Equal(1, Password.CheckPasswordsFromFileToboggan("input/day2.txt"));
         }
     }
 }

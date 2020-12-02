@@ -4,18 +4,8 @@ using Xunit;
 
 namespace Advent2020
 {
-    public class CommonTest
+    public class IterToolsTest
     {
-        [Fact]
-        public void TestReadFileOfInts()
-        {
-            Assert.Equal(6, FileReader.ReadFileOfInts("test_input.txt").Count);
-        }
-        [Fact]
-        public void TestReadFileOfStrings()
-        {
-            Assert.Equal(6, FileReader.ReadFileOfStrings("test_input.txt").Count);
-        }
         [Fact]
         public void TestCombinations()
         {

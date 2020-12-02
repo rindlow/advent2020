@@ -12,14 +12,12 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Password\Password.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="test_input.txt">
+    <Content Include="input\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Advent2020\Advent2020.csproj" />
   </ItemGroup>
 </Project>
