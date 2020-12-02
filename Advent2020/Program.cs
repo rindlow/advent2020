@@ -69,7 +69,7 @@ namespace Advent2020
                 {
                     if (Days[i] != null)
                     {
-                        Days[1].Run().Print();
+                        Days[i].Run().Print();
                     }
                 }
             }
