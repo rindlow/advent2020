@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExpenseReport\ExpenseReport.csproj" />
+    <ProjectReference Include="..\Password\Password.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

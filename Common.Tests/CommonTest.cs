@@ -12,6 +12,11 @@ namespace Advent2020
             Assert.Equal(6, FileReader.ReadFileOfInts("test_input.txt").Count);
         }
         [Fact]
+        public void TestReadFileOfStrings()
+        {
+            Assert.Equal(6, FileReader.ReadFileOfStrings("test_input.txt").Count);
+        }
+        [Fact]
         public void TestCombinations()
         {
             List<List<string>> expected = new List<List<string>>();

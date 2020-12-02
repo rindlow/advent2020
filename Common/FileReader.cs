@@ -6,18 +6,26 @@ namespace Advent2020
 {
     public  class FileReader
     {
-        public static List<int> ReadFileOfInts(string filename)
+        public static List<T> ReadFile<T>(string filename, Func<string, T> transform)
         {
             using (TextReader reader = File.OpenText(filename))
             {
-                List<int> lines = new List<int>();
+                List<T> lines = new List<T>();
                 String line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    lines.Add(int.Parse(line));
+                    lines.Add(transform(line));
                 }
                 return lines;
             }
+        }
+        public static List<int> ReadFileOfInts(string filename)
+        {
+            return ReadFile<int>(filename, (line) => int.Parse(line));
+        }
+        public static List<string> ReadFileOfStrings(string filename)
+        {
+            return ReadFile<string>(filename, (line) => line);
         }
     }
 }

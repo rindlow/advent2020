@@ -42,13 +42,23 @@ namespace Advent2020
         }
     }
 
+    class Day2 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 2;
+            answer_part1 = Password.CheckPasswordsFromFile("input/day2.txt").ToString();
+            answer_part2 = Password.CheckPasswordsFromFileToboggan("input/day2.txt").ToString();
+            return this;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Advent 2020\n");
             new Day1().Run().Print();
-
+            new Day2().Run().Print();
         }
     }
 }
