@@ -78,7 +78,7 @@ namespace Advent2020
                 for (int i = 1; i < argv.Length; i++)
                 {
                     int day;
-                    if (int.TryParse(argv[i], out day) && Days[day] != null)
+                    if (int.TryParse(argv[i], out day) && day > 0 && day < 26 && Days[day] != null)
                     {
                         Days[day].Run().Print();
                     }
