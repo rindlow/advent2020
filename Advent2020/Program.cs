@@ -54,11 +54,36 @@ namespace Advent2020
     }
     class Program
     {
+
         static void Main(string[] args)
         {
             Console.WriteLine("Advent 2020\n");
-            new Day1().Run().Print();
-            new Day2().Run().Print();
+            Day[] Days = new Day[26];
+            Days[1] = new Day1();
+            Days[2] = new Day2();
+
+            string[] argv = System.Environment.GetCommandLineArgs();
+            if (argv.Length < 2)
+            {
+                for (int i = 1; i < 26; i++)
+                {
+                    if (Days[i] != null)
+                    {
+                        Days[1].Run().Print();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 1; i < argv.Length; i++)
+                {
+                    int day;
+                    if (int.TryParse(argv[i], out day) && Days[day] != null)
+                    {
+                        Days[day].Run().Print();
+                    }
+                }
+            }
         }
     }
 }
