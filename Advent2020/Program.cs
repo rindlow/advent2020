@@ -14,7 +14,6 @@ namespace Advent2020
         public Day()
         {
             stopwatch = new Stopwatch();
-            stopwatch.Start();
         }
 
         public abstract Day Run();
@@ -35,6 +34,8 @@ namespace Advent2020
         public override Day Run()
         {
             dayOfMonth = 1;
+            stopwatch.Start();
+
             ExpenseReport expense = new ExpenseReport();
             answer_part1 = expense.MultiplyEntriesFromFile("input/day1.txt", 2, 2020).ToString();
             answer_part2 = expense.MultiplyEntriesFromFile("input/day1.txt", 3, 2020).ToString();
@@ -47,8 +48,22 @@ namespace Advent2020
         public override Day Run()
         {
             dayOfMonth = 2;
+            stopwatch.Start();
+
             answer_part1 = Password.CheckPasswordsFromFile("input/day2.txt").ToString();
             answer_part2 = Password.CheckPasswordsFromFileToboggan("input/day2.txt").ToString();
+            return this;
+        }
+    }
+    class Day3 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 3;
+            stopwatch.Start();
+            Toboggan toboggan = new Toboggan("input/day3.txt");
+            answer_part1 = toboggan.Collisions(3, 1).ToString();
+            answer_part2 = toboggan.CollisionProduct(new int[,] {{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}}).ToString();
             return this;
         }
     }
@@ -61,6 +76,7 @@ namespace Advent2020
             Day[] Days = new Day[26];
             Days[1] = new Day1();
             Days[2] = new Day2();
+            Days[3] = new Day3();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
