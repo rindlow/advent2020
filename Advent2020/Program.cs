@@ -67,6 +67,17 @@ namespace Advent2020
             return this;
         }
     }
+    class Day4 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 4;
+            stopwatch.Start();
+            answer_part1 = Passport.CheckPassportsFromFile("input/day4.txt").ToString();
+            answer_part2 = Passport.ValidatePassportsFromFile("input/day4.txt").ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -77,6 +88,7 @@ namespace Advent2020
             Days[1] = new Day1();
             Days[2] = new Day2();
             Days[3] = new Day3();
+            Days[4] = new Day4();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
