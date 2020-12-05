@@ -77,6 +77,17 @@ namespace Advent2020
             answer_part2 = Passport.ValidatePassportsFromFile("input/day4.txt").ToString();
             return this;
         }
+    }    
+    class Day5 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 5;
+            stopwatch.Start();
+            answer_part1 = BoardingPass.HighestSeatIdInFile("input/day5.txt").ToString();
+            answer_part2 = BoardingPass.FindGapInFile("input/day5.txt").ToString();
+            return this;
+        }
     }
     class Program
     {
@@ -89,6 +100,7 @@ namespace Advent2020
             Days[2] = new Day2();
             Days[3] = new Day3();
             Days[4] = new Day4();
+            Days[5] = new Day5();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
