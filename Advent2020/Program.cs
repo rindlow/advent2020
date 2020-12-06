@@ -88,6 +88,17 @@ namespace Advent2020
             answer_part2 = BoardingPass.FindGapInFile("input/day5.txt").ToString();
             return this;
         }
+    }    
+    class Day6 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 6;
+            stopwatch.Start();
+            answer_part1 = CustomsDeclaration.SumDeclarationsFromFile("input/day6.txt").ToString();
+            answer_part2 = CustomsDeclaration.SumDeclarationsEveryoneFromFile("input/day6.txt").ToString();
+            return this;
+        }
     }
     class Program
     {
@@ -101,6 +112,7 @@ namespace Advent2020
             Days[3] = new Day3();
             Days[4] = new Day4();
             Days[5] = new Day5();
+            Days[6] = new Day6();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
