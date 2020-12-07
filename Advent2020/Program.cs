@@ -99,6 +99,18 @@ namespace Advent2020
             answer_part2 = CustomsDeclaration.SumDeclarationsEveryoneFromFile("input/day6.txt").ToString();
             return this;
         }
+    }    
+    class Day7 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 7;
+            stopwatch.Start();
+            LuggageProcess process = new LuggageProcess("input/day7.txt");
+            answer_part1 = process.NumberOfContainingBags("shiny gold").ToString();
+            answer_part2 = process.NumberOfBagsInBag("shiny gold").ToString();
+            return this;
+        }
     }
     class Program
     {
@@ -113,6 +125,7 @@ namespace Advent2020
             Days[4] = new Day4();
             Days[5] = new Day5();
             Days[6] = new Day6();
+            Days[7] = new Day7();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
