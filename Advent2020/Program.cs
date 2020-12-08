@@ -112,6 +112,19 @@ namespace Advent2020
             return this;
         }
     }
+    class Day8 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 8;
+            stopwatch.Start();
+            GameConsole console = new GameConsole();
+            console.ReadProgamFromFile("input/day8.txt");
+            answer_part1 = console.RunUntilLoop().ToString();
+            answer_part2 = console.RunUntilPatched().ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -126,6 +139,7 @@ namespace Advent2020
             Days[5] = new Day5();
             Days[6] = new Day6();
             Days[7] = new Day7();
+            Days[8] = new Day8();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
