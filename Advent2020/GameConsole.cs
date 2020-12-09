@@ -101,6 +101,10 @@ namespace Advent2020
                     {
                         return acc;
                     }
+                    if (error)
+                    {
+                        return 0;
+                    }
                     Patch(i);
                 }
             }

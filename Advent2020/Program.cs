@@ -125,6 +125,18 @@ namespace Advent2020
             return this;
         }
     }
+    class Day9 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 9;
+            stopwatch.Start();
+            Xmas xmas = new Xmas("input/day9.txt", 25);
+            answer_part1 = xmas.FirstInvalidNumber().ToString();
+            answer_part2 = xmas.FindWeakness().ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -140,6 +152,7 @@ namespace Advent2020
             Days[6] = new Day6();
             Days[7] = new Day7();
             Days[8] = new Day8();
+            Days[9] = new Day9();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)

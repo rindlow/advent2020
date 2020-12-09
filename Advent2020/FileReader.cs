@@ -23,6 +23,10 @@ namespace Advent2020
         {
             return ReadFile<int>(filename, (line) => int.Parse(line));
         }
+        public static List<long> ReadFileOfLongs(string filename)
+        {
+            return ReadFile<long>(filename, (line) => long.Parse(line));
+        }
         public static List<string> ReadFileOfStrings(string filename)
         {
             return ReadFile<string>(filename, (line) => line);
