@@ -137,6 +137,18 @@ namespace Advent2020
             return this;
         }
     }
+    class Day10 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 10;
+            stopwatch.Start();
+            Jolts jolts = new Jolts("input/day10.txt");
+            answer_part1 = jolts.Differences().ToString();
+            answer_part2 = jolts.Arrangements().ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -153,6 +165,7 @@ namespace Advent2020
             Days[7] = new Day7();
             Days[8] = new Day8();
             Days[9] = new Day9();
+            Days[10] = new Day10();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
