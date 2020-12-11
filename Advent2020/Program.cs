@@ -149,6 +149,22 @@ namespace Advent2020
             return this;
         }
     }
+    class Day11 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 11;
+            stopwatch.Start();
+            Seating seating = new Seating("input/day11.txt");
+            seating.RunUntilNoChange();
+            answer_part1 = seating.OccupiedSeats().ToString();
+
+            seating = new Seating("input/day11.txt");
+            seating.RunLineOfSightUntilNoChange();
+            answer_part2 = seating.OccupiedSeats().ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -166,6 +182,7 @@ namespace Advent2020
             Days[8] = new Day8();
             Days[9] = new Day9();
             Days[10] = new Day10();
+            Days[11] = new Day11();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
