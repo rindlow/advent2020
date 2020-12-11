@@ -16,16 +16,16 @@ namespace Advent2020
         }
         public void RunUntilNoChange()
         {
-            while (OccupySeats() || LeaveSeats());
+            while (UpdateSeats((row, col) => Seats[row][col] == 'L' && OccupiedInLineOfSight(row, col, 1) == 0, '#')
+                   || UpdateSeats((row, col) => Seats[row][col] == '#' && OccupiedInLineOfSight(row, col, 1) >= 4, 'L'));
         }
         public void RunLineOfSightUntilNoChange()
         {
-            while (OccupySeatsInLineOfSight() || LeaveSeatsInLineOfSight());
+            while (UpdateSeats((row, col) => Seats[row][col] == 'L' && OccupiedInLineOfSight(row, col, 0) == 0, '#')
+                   || UpdateSeats((row, col) => Seats[row][col] == '#' && OccupiedInLineOfSight(row, col, 0) >= 5, 'L'));
         }
-        private bool OccupySeats()
+        private bool UpdateSeats(Func<int, int, bool> test, char newStatus)
         {
-            // Console.WriteLine("OccupySeats");
-            // PrintSeats();
             int changes = 0;
             List<List<char>> newSeats = new List<List<char>>();
             for (int row = 0; row < Rows; row++)
@@ -33,61 +33,9 @@ namespace Advent2020
                 List<char> newRow = new List<char>();
                 for (int col = 0; col < Cols; col++)
                 {   
-                    if (Seats[row][col] == 'L' && AdjacentOccupied(row, col) == 0)
+                    if (test(row, col))
                     {
-                        newRow.Add('#');
-                        changes++;
-                    }
-                    else
-                    {
-                        newRow.Add(Seats[row][col]);
-                    }
-                }
-                newSeats.Add(newRow);
-            }
-            Seats = newSeats;
-            return changes > 0;
-        }
-        private bool OccupySeatsInLineOfSight()
-        {
-            // Console.WriteLine("OccupySeats");
-            // PrintSeats();
-            int changes = 0;
-            List<List<char>> newSeats = new List<List<char>>();
-            for (int row = 0; row < Rows; row++)
-            {
-                List<char> newRow = new List<char>();
-                for (int col = 0; col < Cols; col++)
-                {   
-                    if (Seats[row][col] == 'L' && OccupiedInLineOfSight(row, col) == 0)
-                    {
-                        newRow.Add('#');
-                        changes++;
-                    }
-                    else
-                    {
-                        newRow.Add(Seats[row][col]);
-                    }
-                }
-                newSeats.Add(newRow);
-            }
-            Seats = newSeats;
-            return changes > 0;
-        }
-        private bool LeaveSeats()
-        {
-            // Console.WriteLine("LeaveSeats");
-            // PrintSeats();
-            int changes = 0;
-            List<List<char>> newSeats = new List<List<char>>();
-            for (int row = 0; row < Rows; row++)
-            {
-                List<char> newRow = new List<char>();
-                for (int col = 0; col < Cols; col++)
-                {   
-                    if (Seats[row][col] == '#' && AdjacentOccupied(row, col) >= 4)
-                    {
-                        newRow.Add('L');
+                        newRow.Add(newStatus);
                         changes++;
                     }
                     else
@@ -98,54 +46,9 @@ namespace Advent2020
                 newSeats.Add(newRow);
             }      
             Seats = newSeats;
-            return changes > 0;      
+            return changes > 0;
         }
-        private bool LeaveSeatsInLineOfSight()
-        {
-            // Console.WriteLine("LeaveSeats");
-            // PrintSeats();
-            int changes = 0;
-            List<List<char>> newSeats = new List<List<char>>();
-            for (int row = 0; row < Rows; row++)
-            {
-                List<char> newRow = new List<char>();
-                for (int col = 0; col < Cols; col++)
-                {   
-                    if (Seats[row][col] == '#' && OccupiedInLineOfSight(row, col) >= 5)
-                    {
-                        newRow.Add('L');
-                        changes++;
-                    }
-                    else
-                    {
-                        newRow.Add(Seats[row][col]);
-                    }
-                }
-                newSeats.Add(newRow);
-            }      
-            Seats = newSeats;
-            return changes > 0;      
-        }
-        private int AdjacentOccupied(int row, int col)
-        {
-            int occupied = 0;
-            for (int r = Math.Max(0, row - 1); r < Math.Min(Rows, row + 2); r++)
-            {
-                for (int c = Math.Max(0, col - 1); c < Math.Min(Cols, col + 2); c++)
-                {
-                    if (r == row && c == col)
-                    {
-                        continue;
-                    }
-                    if (Seats[r][c] == '#')
-                    {
-                        occupied++;
-                    }
-                }
-            }
-            return occupied;
-        }
-        private int OccupiedInLineOfSight(int row, int col)
+        private int OccupiedInLineOfSight(int row, int col, int maxSight)
         {
             int occupied = 0;
             for (int dr = -1; dr < 2; dr++)
@@ -158,8 +61,10 @@ namespace Advent2020
                     }
                     int r = row;
                     int c = col;
-                    while (true)
+                    int sight = 0;
+                    while (maxSight == 0 || sight < maxSight)
                     {
+                        sight++;
                         r += dr;
                         c += dc;
                         if (r < 0 || r >= Rows || c < 0 || c >= Cols)
@@ -183,17 +88,6 @@ namespace Advent2020
         public int OccupiedSeats()
         {
             return Seats.Select(row => row.Count(c => c == '#')).Sum();
-        }
-        private void PrintSeats()
-        {
-            foreach (List<char> row in Seats)
-            {
-                foreach (char c in row)
-                {
-                    Console.Write(c);
-                }
-                Console.WriteLine();
-            }
         }
     }
 }
