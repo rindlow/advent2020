@@ -16,15 +16,15 @@ namespace Advent2020
         }
         public void RunUntilNoChange()
         {
-            while (UpdateSeats((row, col) => Seats[row][col] == 'L' && OccupiedInLineOfSight(row, col, 1) == 0, '#')
-                   || UpdateSeats((row, col) => Seats[row][col] == '#' && OccupiedInLineOfSight(row, col, 1) >= 4, 'L'));
+            while (UpdateSeats((row, col) => OccupiedInLineOfSight(row, col, 1) == 0, 'L', '#')
+                   || UpdateSeats((row, col) => OccupiedInLineOfSight(row, col, 1) >= 4, '#', 'L'));
         }
         public void RunLineOfSightUntilNoChange()
         {
-            while (UpdateSeats((row, col) => Seats[row][col] == 'L' && OccupiedInLineOfSight(row, col, 0) == 0, '#')
-                   || UpdateSeats((row, col) => Seats[row][col] == '#' && OccupiedInLineOfSight(row, col, 0) >= 5, 'L'));
+            while (UpdateSeats((row, col) => OccupiedInLineOfSight(row, col, 0) == 0, 'L', '#')
+                   || UpdateSeats((row, col) => OccupiedInLineOfSight(row, col, 0) >= 5, '#', 'L'));
         }
-        private bool UpdateSeats(Func<int, int, bool> test, char newStatus)
+        private bool UpdateSeats(Func<int, int, bool> test, char oldStatus, char newStatus)
         {
             int changes = 0;
             List<List<char>> newSeats = new List<List<char>>();
@@ -33,7 +33,7 @@ namespace Advent2020
                 List<char> newRow = new List<char>();
                 for (int col = 0; col < Cols; col++)
                 {   
-                    if (test(row, col))
+                    if (Seats[row][col] == oldStatus && test(row, col))
                     {
                         newRow.Add(newStatus);
                         changes++;
