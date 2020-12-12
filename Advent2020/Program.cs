@@ -164,6 +164,21 @@ namespace Advent2020
             answer_part2 = seating.OccupiedSeats().ToString();
             return this;
         }
+    }    
+    class Day12 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 12;
+            stopwatch.Start();
+            Ferry ferry = new Ferry();
+            ferry.NavigateFromFile("input/day12.txt");
+            answer_part1 = ferry.DistanceFromStart().ToString();
+            ferry = new Ferry();
+            ferry.NavigateByWaypointFromFile("input/day12.txt");
+            answer_part2 = ferry.DistanceFromStart().ToString();
+            return this;
+        }
     }
     class Program
     {
@@ -183,6 +198,7 @@ namespace Advent2020
             Days[9] = new Day9();
             Days[10] = new Day10();
             Days[11] = new Day11();
+            Days[12] = new Day12();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
