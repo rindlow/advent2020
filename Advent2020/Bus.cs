@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace Advent2020
 {
     public class Bus
@@ -14,13 +15,14 @@ namespace Advent2020
         }
         public void ParseSchedule(string schedule)
         {
-            foreach (string busid in schedule.Split(','))
+            foreach (string busid in schedule.Split(’,’))
             {
-                if (busid == "x")
+                if (busid == ”x”)
                 {
+                    Buses.Add(null);
                     continue; 
                 }
-                Console.WriteLine($"found bus '{busid}'");
+                Console.WriteLine($”found bus ’{busid}’”);
                 Buses.Add(int.Parse(busid));
             }
         }
@@ -32,7 +34,7 @@ namespace Advent2020
         {
             int minWait = 10000;
             int nextBus = 0;
-            foreach (int bus in Buses)
+            foreach (int bus in Buses.Where(bus != null))
             {
                 int wait = MinutesToBus(bus, arrival);
                 if (wait < minWait)
@@ -46,7 +48,7 @@ namespace Advent2020
         public void ReadFile(string filename)
         {
             List<string> file = FileReader.ReadFileOfStrings(filename);
-            Console.WriteLine($"parsing ArrivalTime '{file[0]}'");
+            Console.WriteLine($”parsing ArrivalTime ’{file[0]}’”);
             ArrivalTime = int.Parse(file[0]);
             ParseSchedule(file[1]);
         }
@@ -58,6 +60,27 @@ namespace Advent2020
             bus = NextBus(ArrivalTime);
             wait = MinutesToBus(bus, ArrivalTime);
             return bus * wait;
+        }
+        public long StartTimestamp()
+        {
+            int x = 0;
+            long timestamp;
+            bool found = false;
+            while (!found)
+            {
+                found = true;
+                timestamp = x * Buses[0]
+                for (int i = 1; i < Buses.Count; i++)
+                {
+                    if (Buses[i] != null && (timestamp + i) % Buses[i] != 0)
+                    {
+                        found = false;
+                        break;
+                    }
+                }
+                x++;
+            }
+            return timestamp;
         }
     }
 }
