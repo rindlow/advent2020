@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace Advent2020
@@ -180,6 +180,17 @@ namespace Advent2020
             return this;
         }
     }
+    class Day13 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 13;
+            stopwatch.Start();
+            Bus bus = new Bus();
+            answer_part1 = bus.NextBusTimesWaitFromFile("input/day12.txt");
+            return this;
+        }
+    }
     class Program
     {
 
@@ -199,6 +210,7 @@ namespace Advent2020
             Days[10] = new Day10();
             Days[11] = new Day11();
             Days[12] = new Day12();
+            Days[13] = new Day13();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
