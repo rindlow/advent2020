@@ -14,9 +14,9 @@ namespace Advent2020
         }
         public void ParseSchedule(string schedule)
         {
-            foreach (string busid in schedule.Split(’,’))
+            foreach (string busid in schedule.Split(','))
             {
-                if (busid == ”x”)
+                if (busid == "x")
                 {
                     continue; 
                 }
