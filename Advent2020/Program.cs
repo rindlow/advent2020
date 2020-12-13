@@ -187,7 +187,7 @@ namespace Advent2020
             dayOfMonth = 13;
             stopwatch.Start();
             Bus bus = new Bus();
-            answer_part1 = bus.NextBusTimesWaitFromFile("input/day12.txt");
+            answer_part1 = bus.NextBusTimesWaitFromFile("input/day12.txt").ToString();
             return this;
         }
     }
