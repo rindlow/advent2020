@@ -46,6 +46,7 @@ namespace Advent2020
         public void ReadFile(string filename)
         {
             List<string> file = FileReader.ReadFileOfStrings(filename);
+            Console.WriteLine($"parsing ArrivalTime '{file[0]}'");
             ArrivalTime = int.Parse(file[0]);
             ParseSchedule(file[1]);
         }
