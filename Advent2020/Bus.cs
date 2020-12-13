@@ -15,7 +15,7 @@ namespace Advent2020
         {
             foreach (string busid in schedule.Split(','))
             {
-                if (busid == 'x')
+                if (busid == "x")
                 {
                     continue; 
                 }
