@@ -88,7 +88,6 @@ namespace Advent2020
         {
             long N = Buses.Where(bus => bus != null).Aggregate(1L, (a, b) => (long)a * (long)b, a => a);
             long x = 0;
-            int i = 1;
             foreach (int bus in Buses.Where(bus => bus != null).OrderByDescending(x => x))
             {
                 int n1 = bus;
@@ -98,7 +97,6 @@ namespace Advent2020
                 int a1 = n1 - Buses.IndexOf(n1);
                 ExtendedGCD(n1, N1, out m1, out M1);
                 x += a1 * M1 * N1;
-                i++;
             }
             while (x < 0)
             {
