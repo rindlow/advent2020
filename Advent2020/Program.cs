@@ -188,6 +188,23 @@ namespace Advent2020
             stopwatch.Start();
             Bus bus = new Bus();
             answer_part1 = bus.NextBusTimesWaitFromFile("input/day13.txt").ToString();
+            bus = new Bus();
+            answer_part2 = bus.StartTimestampFromFile("input/day13.txt").ToString();
+            return this;
+        }
+    }
+    class Day14 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 14;
+            stopwatch.Start();
+            PortComputer pc = new PortComputer();
+            pc.RunProgramWithBitmaskFromFile("input/day14.txt");
+            answer_part1 = pc.SumOfMemory().ToString();
+            pc = new PortComputer();
+            pc.RunProgramWithDecoderFromFile("input/day14.txt");
+            answer_part2 = pc.SumOfMemory().ToString();
             return this;
         }
     }
@@ -211,6 +228,7 @@ namespace Advent2020
             Days[11] = new Day11();
             Days[12] = new Day12();
             Days[13] = new Day13();
+            Days[14] = new Day14();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
