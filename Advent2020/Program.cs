@@ -208,6 +208,17 @@ namespace Advent2020
             return this;
         }
     }
+    class Day15 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 15;
+            stopwatch.Start();
+            answer_part1 = MemoryGame.Number("0,20,7,16,1,18,15", 2020).ToString();
+            answer_part2 = MemoryGame.Number("0,20,7,16,1,18,15", 30000000).ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -229,6 +240,7 @@ namespace Advent2020
             Days[12] = new Day12();
             Days[13] = new Day13();
             Days[14] = new Day14();
+            Days[15] = new Day15();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
