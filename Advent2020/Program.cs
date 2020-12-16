@@ -219,6 +219,19 @@ namespace Advent2020
             return this;
         }
     }
+    class Day16 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 16;
+            stopwatch.Start();
+            Ticket ticket = new Ticket("input/day16.txt");
+            answer_part1 = ticket.ScanningErrorRate().ToString();
+            ticket.IdentifyFields();
+            answer_part2 = ticket.ProductOfFieldsContaining("departure").ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -241,6 +254,7 @@ namespace Advent2020
             Days[13] = new Day13();
             Days[14] = new Day14();
             Days[15] = new Day15();
+            Days[16] = new Day16();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
