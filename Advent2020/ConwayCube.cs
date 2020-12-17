@@ -112,13 +112,16 @@ namespace Advent2020
             {
                 for (int y = Ymin - 1; y <= Ymax + 1; y++)
                 {
-                    for (int z = Zmin - 1; z <= Zmax + 1; z++)
+                    for (int z = 0; z <= Zmax + 1; z++)
                     {
-                        for (int w = minW; w <= maxW; w++)
+                        for (int w = 0; w <= maxW; w++)
                         {
                             int non = NumberOfNeighbours(x, y, z, w);
                             Tuple<int, int, int, int> coord = new Tuple<int, int, int, int>(x, y, z, w);
                             newGrid[coord] = (non == 3 || (non == 2 && IsActive(x, y, z, w)));
+                            newGrid[new Tuple<int, int, int, int>(x, y, -z, w)] = newGrid[coord];
+                            newGrid[new Tuple<int, int, int, int>(x, y, z, -w)] = newGrid[coord];
+                            newGrid[new Tuple<int, int, int, int>(x, y, -z, -w)] = newGrid[coord];
                         }
                     }
                 }
