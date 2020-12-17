@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Advent2020
 {
-    public  class FileReader
+    public class FileReader
     {
         public static List<T> ReadFile<T>(string filename, Func<string, T> transform)
         {

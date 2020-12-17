@@ -232,6 +232,21 @@ namespace Advent2020
             return this;
         }
     }
+    class Day17 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 17;
+            stopwatch.Start();
+            ConwayCube cube = new ConwayCube("input/day17.txt");
+            cube.Run(6, 3);
+            answer_part1 = cube.NumberOfActiveCubes().ToString();
+            cube = new ConwayCube("input/day17.txt");
+            cube.Run(6, 4);
+            answer_part2 = cube.NumberOfActiveCubes().ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -255,6 +270,7 @@ namespace Advent2020
             Days[14] = new Day14();
             Days[15] = new Day15();
             Days[16] = new Day16();
+            Days[17] = new Day17();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
