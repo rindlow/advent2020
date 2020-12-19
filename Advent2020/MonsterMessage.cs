@@ -26,7 +26,6 @@ namespace Advent2020
                 PatchRules();
             }
             string rtr = RulesToRegex("0");
-            Console.WriteLine($"Regex = {rtr}");            
             Re = new Regex($"^{rtr}$");
             return Input.Where(s => MatchString(s)).Count();
         }
@@ -83,7 +82,6 @@ namespace Advent2020
         }
         bool MatchString(string input)
         {
-            Console.WriteLine($"MatchString({input}) => {Re.Match(input).Success}");
             return Re.Match(input).Success;
         }
         public void PatchRules()
