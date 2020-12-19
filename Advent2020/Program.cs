@@ -247,6 +247,32 @@ namespace Advent2020
             return this;
         }
     }
+    class Day18 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 18;
+            stopwatch.Start();
+            MathHomework homework = new MathHomework();
+            answer_part1 = homework.SumOfExpressionsFromFile("input/day18.txt").ToString();
+            MathHomeworkWithPrecedence homeworkprecedence = new MathHomeworkWithPrecedence();
+            answer_part2 = homeworkprecedence.SumOfExpressionsFromFile("input/day18.txt").ToString();
+            return this;
+        }
+    }
+    class Day19 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 19;
+            stopwatch.Start();
+            MonsterMessage message = new MonsterMessage();
+            answer_part1 = message.NumberOfMatchesFromFile("input/day19.txt", false).ToString();
+            message = new MonsterMessage();
+            answer_part2 = message.NumberOfMatchesFromFile("input/day19.txt", true).ToString();
+            return this;
+        }
+    }
     class Program
     {
 
@@ -271,6 +297,8 @@ namespace Advent2020
             Days[15] = new Day15();
             Days[16] = new Day16();
             Days[17] = new Day17();
+            Days[18] = new Day18();
+            Days[19] = new Day19();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
