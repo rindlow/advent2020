@@ -187,10 +187,10 @@ namespace Advent2020.ImageTiles
                 case 1:
                     nextTile.RotateCCW();
                     break;
-                case 2:
+                case 3:
                     nextTile.FlipHorizontal();
                     break;
-                case 3:
+                case 2:
                     // Perfect!
                     break;
                 case 4:
@@ -260,15 +260,15 @@ namespace Advent2020.ImageTiles
             }
             return image;
         }
-        List<string> TileImage(int corner)
+        List<string> TileImage()
         {
             List<List<Tile>> tilesquare = new List<List<Tile>>();
             int side = (int)Math.Sqrt(Tiles.Count);
             List<int> cornerTiles = FindCornerTiles();
             Random rnd = new Random();
-            Tile startTile = Tiles[cornerTiles[corner]];
-            // Tile startTile = Tiles[FindCornerTiles().First()];
+            Tile startTile = Tiles[FindCornerTiles().First()];
             List<int> commonBorders = startTile.BorderMatches.Select(m => CommonBorder(startTile.Id, m)).ToList();
+
             while (!commonBorders.Select(b => startTile.Borders.IndexOf(b)).All(i => i > 3))
             {
                 startTile.RotateCCW();
@@ -282,18 +282,29 @@ namespace Advent2020.ImageTiles
                     startTile = TileBelow(row[0]);
                 }
             }
-            foreach (List<Tile> row in tilesquare)
-            {
-                for (int i = 0; i < row[0].Rows.Count; i++)
-                {
-                    foreach (Tile tile in row)
-                    {
-                        Console.Write($"  {tile.Rows[i]}");
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine();
-            }
+            // string red = "\u001b[31m";
+            // string black = "\u001b[0m";
+            // foreach (List<Tile> row in tilesquare)
+            // {
+            //     for (int i = 0; i < row[0].Rows.Count; i++)
+            //     {
+            //         string color;
+            //         if (i == 0 || i == row[0].Rows.Count - 1)
+            //         {
+            //             color = red;
+            //         }
+            //         else
+            //         {
+            //             color = black;
+            //         }
+            //         foreach (Tile tile in row)
+            //         {
+            //             Console.Write($"  {red}{tile.Rows[i][0]}{color}{tile.Rows[i].Substring(1, tile.Rows[i].Length - 2)}{red}{tile.Rows[i][tile.Rows[i].Length - 1]}{color}");
+            //         }
+            //         Console.WriteLine();
+            //     }
+            //     Console.WriteLine(black);
+            // }
             List<string> image = new List<string>();
             foreach (List<Tile> tilerow in tilesquare)
             {
@@ -305,18 +316,43 @@ namespace Advent2020.ImageTiles
             // }
             return image;
         }
+        bool FindMonster(List<string> image, int row, int col)
+        {
+            List<(int, int)> monster = new List<(int, int)> { (0,18),(1,0),(1,5),(1,6),(1,11),(1,12),(1,17),(1,18),(1,19),(2,1),(2,4),(2,7),(2,10),(2,13),(2,16) };
+
+            foreach ((int, int) pos in monster)
+            {
+                if (image[row + pos.Item1][col + pos.Item2] != '#')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         int FindMonsters(List<string> image)
         {
             int width = image[0].Length;
-            string re = $"#(.{{{width - 19}}})#(....)##(....)##(....)###(.{{{width - 19}}})#(..)#(..)#(..)#(..)#(..)#";
-            Regex monsterRe = new Regex(re);
-            string imageString = string.Join("", image);
-            int nMatches = monsterRe.Matches(imageString).Count;
+            int nMatches = 0;
+            for (int row = 0; row < width - 2; row++)
+            {
+                for (int col = 0; col < width - 19; col++)
+                {
+                    if (FindMonster(image, row, col))
+                    {
+                        nMatches++;
+                    }
+                }
+            }
+            return nMatches;
+        }
+
+        int FlipAndFindMonsters(List<string> image)
+        {
             int tries = 0;
-            int maxMatches = 0;
             HashSet<string> seen = new HashSet<string>();
-            seen.Add(imageString);
-            while (tries < 8)
+            int nMatches = FindMonsters(image);
+
+            while (nMatches == 0 && tries < 8)
             {
                 if (tries % 4 == 0)
                 {
@@ -333,28 +369,15 @@ namespace Advent2020.ImageTiles
                     }
                     image = newRows;
                 }
-
-                imageString = string.Join("", image);
-                seen.Add(imageString);
-                nMatches = monsterRe.Matches(imageString).Count;
-                Console.WriteLine($"nMatches = {nMatches}");
-                if (nMatches > maxMatches)
-                {
-                    maxMatches = nMatches;
-                }
+                nMatches = FindMonsters(image);
+                seen.Add(string.Join("", image));
+                // Console.WriteLine($"nMatches = {nMatches}");
                 tries++;
             }
-            Console.WriteLine($"{seen.Count} images scanned");
-            Console.WriteLine($"{nMatches} monsters found");
-            string withMonsters = monsterRe.Replace(imageString, "O$1O$2OO$3OO$4OOO$5O$6O$7O$8O$9O$10O");
-            // for (int i = 0; i < image.Count; i++)
-            // {
-            //     Console.WriteLine(withMonsters.Substring(image[0].Length * i, image[0].Length));
-            // }
-            int waves = withMonsters.Count(c => c == '#');
-            Console.WriteLine($"waves = {waves}");
+            // Console.WriteLine($"{seen.Count} images scanned");
+            // Console.WriteLine($"{nMatches} monsters found");
             // Console.WriteLine($"{image.Count}x{image[0].Length}");
-            return maxMatches;
+            return nMatches;
         }
         int NumberOfWaves(List<string> image)
         {
@@ -364,13 +387,10 @@ namespace Advent2020.ImageTiles
         {
             int now = 0;
             int monsters = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                List<string> image = TileImage(i);
-                now = NumberOfWaves(image);
-                monsters = FindMonsters(image);
-                Console.WriteLine($"NoW = {now}, monsters = {monsters}");
-            }
+
+            List<string> image = TileImage();
+            now = NumberOfWaves(image);
+            monsters = FlipAndFindMonsters(image);            
             return now - 15 * monsters;
         }
     }
