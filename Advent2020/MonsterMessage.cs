@@ -64,10 +64,6 @@ namespace Advent2020
                 }
                 Used[start]++;
             }
-            // else
-            // {
-            //     Used[start] = 1;
-            // }
             if (rule.StartsWith('"'))
             {
                 return rule.Substring(1, 1);
