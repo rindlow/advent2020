@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using Advent2020.Allergen;
+using Advent2020.CrabCombat;
 
 namespace Advent2020
 {
@@ -273,9 +275,47 @@ namespace Advent2020
             return this;
         }
     }
+    class Day20 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 20;
+            stopwatch.Start();
+            ImageTiles.Image image = new ImageTiles.Image("input/day20.txt");
+            answer_part1 = image.ProductOfCornerTiles().ToString();
+            answer_part2 = image.Roughness().ToString();
+            return this;
+        }
+    }
+    class Day21 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 21;
+            stopwatch.Start();
+            FoodList foodlist = new FoodList("input/day21.txt");
+            answer_part1 = foodlist.AllergenFreeIngredientsAppear().ToString();
+            answer_part2 = foodlist.CanonicalList();
+            return this;
+        }
+    }
+    class Day22 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 22;
+            stopwatch.Start();
+            Combat combat = new Combat("input/day22.txt");
+            combat.Play();
+            answer_part1 = combat.WinnerScore().ToString();
+            combat = new Combat("input/day22.txt");
+            combat.PlayRecursive();
+            answer_part2 = combat.WinnerScore().ToString();
+            return this;
+        }
+    }
     class Program
     {
-
         static void Main(string[] args)
         {
             Console.WriteLine("Advent 2020\n");
@@ -299,6 +339,9 @@ namespace Advent2020
             Days[17] = new Day17();
             Days[18] = new Day18();
             Days[19] = new Day19();
+            Days[20] = new Day20();
+            Days[21] = new Day21();
+            Days[22] = new Day22();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
