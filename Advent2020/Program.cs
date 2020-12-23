@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using Advent2020.Allergen;
 using Advent2020.CrabCombat;
+using Advent2020.CrabCups;
 
 namespace Advent2020
 {
@@ -314,6 +315,19 @@ namespace Advent2020
             return this;
         }
     }
+    class Day23 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 23;
+            stopwatch.Start();
+            Cups cups = new Cups("389547612", 9);
+            answer_part1 = cups.LabelAfterMoves(100);
+            cups = new Cups("389547612", 1000000);
+            answer_part2 = cups.ProductOfFirstCups().ToString();
+            return this;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -342,6 +356,7 @@ namespace Advent2020
             Days[20] = new Day20();
             Days[21] = new Day21();
             Days[22] = new Day22();
+            Days[23] = new Day23();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
