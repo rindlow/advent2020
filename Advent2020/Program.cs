@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Advent2020.Allergen;
 using Advent2020.CrabCombat;
 using Advent2020.CrabCups;
+using Advent2020.Lobby;
 
 namespace Advent2020
 {
@@ -328,6 +329,22 @@ namespace Advent2020
             return this;
         }
     }
+    class Day24 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 24;
+            stopwatch.Start();
+            Floor floor = new Floor();
+            floor.FlipTilesFromFile("input/day24.txt");
+            answer_part1 = floor.NumberOfBlackTiles().ToString();
+            floor = new Floor();
+            floor.FlipTilesFromFile("input/day24.txt");
+            floor.ApplyRulesForDays(100);
+            answer_part2 = floor.NumberOfBlackTiles().ToString();
+            return this;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -357,6 +374,7 @@ namespace Advent2020
             Days[21] = new Day21();
             Days[22] = new Day22();
             Days[23] = new Day23();
+            Days[24] = new Day24();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
