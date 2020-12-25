@@ -4,6 +4,7 @@ using Advent2020.Allergen;
 using Advent2020.CrabCombat;
 using Advent2020.CrabCups;
 using Advent2020.Lobby;
+using Advent2020.ComboBreaker;
 
 namespace Advent2020
 {
@@ -345,6 +346,17 @@ namespace Advent2020
             return this;
         }
     }
+    class Day25 : Day
+    {
+        public override Day Run()
+        {
+            dayOfMonth = 25;
+            stopwatch.Start();
+            Rsa rsa = new Rsa(20201227);
+            answer_part1 = rsa.FindEncryptionKeyFromFile("input/day25.txt").ToString();
+            return this;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -375,6 +387,7 @@ namespace Advent2020
             Days[22] = new Day22();
             Days[23] = new Day23();
             Days[24] = new Day24();
+            Days[25] = new Day25();
 
             string[] argv = System.Environment.GetCommandLineArgs();
             if (argv.Length < 2)
