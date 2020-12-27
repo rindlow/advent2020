@@ -12,11 +12,13 @@ namespace Advent2020.Tests
             Cups cups = new Cups(labels, 9);
             Assert.Equal(expected, cups.LabelAfterMoves(moves));
         }
-        [Fact]
-        public void TestProductOfFirstCups()
+        [Theory]
+        [InlineData(1000, 12)]
+        [InlineData(10000000, 149245887792)]
+        public void TestProductOfFirstCups(int moves, long expected)
         {
             Cups cups = new Cups("389125467", 1000000);
-            Assert.Equal(149245887792, cups.ProductOfFirstCups());
+            Assert.Equal(expected, cups.ProductOfFirstCups(moves));
         }
     }
 }
