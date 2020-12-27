@@ -110,7 +110,7 @@ namespace Advent2020.Lobby
             for (int i = 0; i < days; i++)
             {
                 ApplyRules();
-                Console.WriteLine($"Day {i + 1}: {NumberOfBlackTiles()}");
+                // Console.WriteLine($"Day {i + 1}: {NumberOfBlackTiles()}");
             }
         }
         public int NumberOfBlackTiles()

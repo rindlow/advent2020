@@ -326,7 +326,7 @@ namespace Advent2020
             Cups cups = new Cups("389547612", 9);
             answer_part1 = cups.LabelAfterMoves(100);
             cups = new Cups("389547612", 1000000);
-            answer_part2 = cups.ProductOfFirstCups().ToString();
+            answer_part2 = cups.ProductOfFirstCups(10000000).ToString();
             return this;
         }
     }
