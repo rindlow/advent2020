@@ -258,10 +258,9 @@ namespace Advent2020
         {
             dayOfMonth = 18;
             stopwatch.Start();
-            MathHomework homework = new MathHomework();
-            answer_part1 = homework.SumOfExpressionsFromFile("input/day18.txt").ToString();
-            MathHomeworkWithPrecedence homeworkprecedence = new MathHomeworkWithPrecedence();
-            answer_part2 = homeworkprecedence.SumOfExpressionsFromFile("input/day18.txt").ToString();
+            ShuntingYard homework = new ShuntingYard();
+            answer_part1 = homework.SumOfExpressionsFromFile(false, "input/day18.txt").ToString();
+            answer_part2 = homework.SumOfExpressionsFromFile(true, "input/day18.txt").ToString();
             return this;
         }
     }
